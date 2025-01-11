@@ -3,7 +3,7 @@ id = "WFRus"
 name = "WFRus"
 description = "Русификатор WEBFISHING"
 version = "0.0.1"
-homepage = "https://steamcommunity.com"
+homepage = "https://github.com/xllifi/WFRus"
 author = "xllifi"
 
 icon = "icon.png"
