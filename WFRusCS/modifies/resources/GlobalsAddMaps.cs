@@ -17,8 +17,10 @@ public class GlobalsAddMaps : IScriptMod {
         foreach (var token in tokens) {
             if (waiter.Check(token)) {
                 // og next line
-                yield return new Token(TokenType.Newline);
-
+                yield return token;
+                
+                IEnumerable<Token> tkns = [];
+                
                 Dictionary<string, string> titleNameDict = new Dictionary<string, string> {
                     ["Scout"] = "Скаут",
                     ["Second Class Scout"] = "Второклассный скаут",
@@ -90,18 +92,9 @@ public class GlobalsAddMaps : IScriptMod {
                     ["Yapper"] = "Болтун",
                     ["ZedDog"] = "ZedDog"
                 };
-                var titleNameTokens = parseDictionary(titleNameDict);
-
-                yield return new Token(TokenType.PrVar);
-                yield return new IdentifierToken("titlenamemap");
-                yield return new Token(TokenType.OpAssign);
-                yield return new Token(TokenType.CurlyBracketOpen);
-                foreach (var tkn in titleNameTokens) yield return tkn;
-                yield return new Token(TokenType.CurlyBracketClose);
+                tkns = tkns.Concat(assignDictionary("titlenamedict", titleNameDict));
+                tkns = tkns.Append(new Token(TokenType.Newline));
                 
-                // next line
-                yield return new Token(TokenType.Newline);
-
                 Dictionary<string, string> titleDescDict = new Dictionary<string, string> {
                     ["Welcome to Camp!"] = "Добро пожаловать в лагерь!",
                     ["Getting the ropes!"] = "Уже понимаешь, как всё завязано!",
@@ -172,22 +165,28 @@ public class GlobalsAddMaps : IScriptMod {
                     ["Yap yap yap!"] = "Бла бла бла!",
                     ["zeddy doggy"] = "zeddy doggy"
                 };
-                var titleDescTokens = parseDictionary(titleDescDict);
+                tkns = tkns.Concat(assignDictionary("titledescdict", titleDescDict));
+                tkns = tkns.Append(new Token(TokenType.Newline));
 
-                yield return new Token(TokenType.PrVar);
-                yield return new IdentifierToken("titledescmap");
-                yield return new Token(TokenType.OpAssign);
-                yield return new Token(TokenType.CurlyBracketOpen);
-                foreach (var tkn in titleDescTokens) yield return tkn;
-                yield return new Token(TokenType.CurlyBracketClose);
-
-                // next line
-                yield return new Token(TokenType.Newline);
+                foreach (var tkn in tkns) yield return tkn;
             } else {
                 // return the original token
                 yield return token;
             }
         }
+    }
+
+    private IEnumerable<Token> assignDictionary(string identifier, Dictionary<string, string> dict) {
+        IEnumerable<Token> tkns = [];
+        
+        tkns = tkns.Append(new Token(TokenType.PrVar));
+        tkns = tkns.Append(new IdentifierToken(identifier));
+        tkns = tkns.Append(new Token(TokenType.OpAssign));
+        tkns = tkns.Append(new Token(TokenType.CurlyBracketOpen));
+        tkns = tkns.Concat(parseDictionary(dict));
+        tkns = tkns.Append(new Token(TokenType.CurlyBracketClose));
+
+        return tkns;
     }
 
     private IEnumerable<Token> parseDictionary(Dictionary<string, string> dict) {

@@ -1,4 +1,5 @@
 ﻿using GDWeave;
+using GDWeave.Godot;
 using Serilog;
 using WFRus.modifies;
 using WFRus.modifies.titles;
@@ -10,13 +11,14 @@ public class Mod : IMod {
     public ILogger ModLogger;
 
     public Mod(IModInterface modInterface) {
-        this.Config = modInterface.ReadConfig<Config>();
-        this.ModLogger = modInterface.Logger;
-        modInterface.RegisterScriptMod(new MainMenu());
-        modInterface.RegisterScriptMod(new SpeechBubble());
+        Config = modInterface.ReadConfig<Config>();
+        ModLogger = modInterface.Logger;
         modInterface.RegisterScriptMod(new GlobalsAddMaps());
         modInterface.RegisterScriptMod(new GlobalsUseMaps());
-        this.ModLogger.Information("[WFRusCS] C# Mod initialized!");
+        modInterface.RegisterScriptMod(new MainMenu());
+        modInterface.RegisterScriptMod(new SpeechBubble());
+        modInterface.RegisterScriptMod(new LevelBubble());
+        ModLogger.Information("[WFRusCS] C# Mod initialized!");
     }
 
     public void Dispose() {
