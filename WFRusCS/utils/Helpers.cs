@@ -38,7 +38,7 @@ public static class Helpers {
         tkns = tkns.Append(new IdentifierToken(param));
         tkns = tkns.Append(new Token(TokenType.OpAssign));
         tkns = tkns.Append(new ConstantToken(new StringVariant(str)));
-        tkns = tkns.Append(new Token(TokenType.Newline, 1)); // Indent once
+        tkns = tkns.Append(new Token(TokenType.Newline, 1));
 
         return tkns;
     }
