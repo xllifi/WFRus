@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebfishingSampleMod", "WebfishingSampleMod\WebfishingSampleMod.csproj", "{23B505B3-8468-4B5C-BC32-DDC627920463}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WFRus", "WFRusCS\WFRus.csproj", "{23B505B3-8468-4B5C-BC32-DDC627920463}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
