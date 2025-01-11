@@ -8,6 +8,7 @@ author = "xllifi"
 
 icon = "icon.png"
 readme = "README.md"
+changelog = "CHANGELOG.md"
 
 [project]
 csharp = "./WFRusCS/WFRus.csproj"
