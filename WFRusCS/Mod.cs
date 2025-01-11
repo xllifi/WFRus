@@ -16,6 +16,7 @@ public class Mod : IMod {
         modInterface.RegisterScriptMod(new GlobalsAddMaps());
         modInterface.RegisterScriptMod(new GlobalsUseMaps());
         modInterface.RegisterScriptMod(new MainMenu());
+        modInterface.RegisterScriptMod(new OptionsMenu());
         modInterface.RegisterScriptMod(new SpeechBubble());
         modInterface.RegisterScriptMod(new LevelBubble());
         ModLogger.Information("[WFRusCS] C# Mod initialized!");
