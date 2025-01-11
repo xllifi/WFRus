@@ -1,10 +1,11 @@
-﻿using GDWeave.Godot;
+﻿using GDWeave;
+using GDWeave.Godot;
 using GDWeave.Godot.Variants;
 using GDWeave.Modding;
 
 namespace WFRus.modifies;
 
-public class MainMenu : IScriptMod {
+public class MainMenu(WFRusMod mod) : IScriptMod {
     public bool ShouldRun(string path) => path == "res://Scenes/Menus/Main Menu/main_menu.gdc";
 
     public IEnumerable<Token> Modify(string path, IEnumerable<Token> tokens) {
@@ -18,8 +19,10 @@ public class MainMenu : IScriptMod {
                 yield return token;
                 IEnumerable<Token> tkns = [];
                 
+                mod.Logger.Information($"Trying to load mainmenu logo from {mod.Config.mainmenuLogoPath}");
                 tkns = tkns.Concat(ScriptTokenizer.Tokenize("""TextPrint("[WFRusCS>GD] Injected into main_menu.gd!")""", 1));
-                tkns = tkns.Concat(ScriptTokenizer.Tokenize("""$TextureRect.texture = ResourceLoad("res://mods/WFRus/Cyrillic/WFlogo.png")""", 1));
+                tkns = tkns.Concat(Helpers.LoadExtImage("TextureRect", mod.Config.mainmenuLogoPath));
+                
                 tkns = tkns.Concat(ScriptTokenizer.Tokenize("""if PlayerData.player_options.altfont == 0:""", 1));
                 tkns = tkns.Concat(ScriptTokenizer.Tokenize("""ResourceLoad("res://Assets/Themes/main.tres").default_font = ResourceLoad("res://mods/WFRus/Cyrillic/cyrillic.tres")""", 2));
                 

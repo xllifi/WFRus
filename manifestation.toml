@@ -2,13 +2,19 @@
 id = "WFRus"
 name = "WFRus"
 description = "Русификатор WEBFISHING"
-version = "0.0.5"
+version = "0.0.6"
 homepage = "https://github.com/xllifi/WFRus"
 author = "xllifi"
 
 icon = "icon.png"
 readme = "README.md"
 changelog = "CHANGELOG.md"
+
+extra_files = [
+  "Assets/mainmenuLogo.png",
+  "Assets/splashLame.png",
+  "Assets/splashGodot.png"
+]
 
 [project]
 csharp = "./WFRusCS/WFRus.csproj"

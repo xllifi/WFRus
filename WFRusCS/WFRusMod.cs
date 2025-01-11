@@ -6,20 +6,21 @@ using WFRus.modifies.titles;
 
 namespace WFRus;
 
-public class Mod : IMod {
+public class WFRusMod : IMod {
     public Config Config;
-    public ILogger ModLogger;
+    public ILogger Logger;
 
-    public Mod(IModInterface modInterface) {
+    public WFRusMod(IModInterface modInterface) {
         Config = modInterface.ReadConfig<Config>();
-        ModLogger = modInterface.Logger;
+        Logger = modInterface.Logger;
         modInterface.RegisterScriptMod(new GlobalsAddMaps());
         modInterface.RegisterScriptMod(new GlobalsUseMaps());
-        modInterface.RegisterScriptMod(new MainMenu());
+        modInterface.RegisterScriptMod(new SplashScreen(this));
+        modInterface.RegisterScriptMod(new MainMenu(this));
         modInterface.RegisterScriptMod(new OptionsMenu());
         modInterface.RegisterScriptMod(new SpeechBubble());
         modInterface.RegisterScriptMod(new LevelBubble());
-        ModLogger.Information("[WFRusCS] C# Mod initialized!");
+        Logger.Information("[WFRusCS] C# Mod initialized!");
     }
 
     public void Dispose() {
