@@ -1,7 +1,7 @@
 ﻿using GDWeave.Godot;
 using GDWeave.Modding;
 
-namespace WFRus.modifies.titles;
+namespace WFRus.modifies.globals;
 
 public class GlobalsUseMaps : IScriptMod {
     public bool ShouldRun(string path) => path == "res://Scenes/Singletons/globals.gdc";

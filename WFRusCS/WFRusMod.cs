@@ -1,8 +1,7 @@
 ﻿using GDWeave;
-using GDWeave.Godot;
 using Serilog;
 using WFRus.modifies;
-using WFRus.modifies.titles;
+using WFRus.modifies.globals;
 
 namespace WFRus;
 
@@ -13,6 +12,8 @@ public class WFRusMod : IMod {
     public WFRusMod(IModInterface modInterface) {
         Config = modInterface.ReadConfig<Config>();
         Logger = modInterface.Logger;
+        modInterface.RegisterScriptMod(new Voice());
+        modInterface.RegisterScriptMod(new PlayerVoice());
         modInterface.RegisterScriptMod(new GlobalsAddMaps());
         modInterface.RegisterScriptMod(new GlobalsUseMaps());
         modInterface.RegisterScriptMod(new SplashScreen(this));
